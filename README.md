@@ -66,7 +66,7 @@ python marketplace.py
 - **`defaultdict_to_dict(d)`**: Recursively converts a `defaultdict` to a regular dictionary. Loads data from the CSV file into a nested dictionary, filters out games with fewer than 4 entries, and converts the defaultdict to a regular dictionary.
 
 #### Marketplace Simulation
-- **`simulate_marketplace(nb_acheteurs, donnees_dict)`**: Simulates the marketplace with a specified number of buyers. This function includes:
+- **`simulate_marketplace(nb_acheteurs, donnees_dict)`**: Simulates the marketplace with a specified number of buyers for all the games. This function includes:
   - **Seller Side**: Generates bids based on game data.
   - **Buyer Side**: Uses a logistic classifier to determine `bmax` for buyers and generates their bids.
   - **Optimization**: Uses linear programming to maximize the market surplus by matching bids.
@@ -100,3 +100,4 @@ The main function generates a plot showing the market surplus versus the number 
 - Experiment with different machine learning models.
 - Optimize the selection of the threshold in the classifier function.
 - Enhance the visualization and analysis of results.
+- Display other plots showing execution time versus the number of agents or the surplus versus other parameters.

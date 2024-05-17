@@ -99,11 +99,11 @@ def simulate_marketplace(nb_acheteurs,donnees_dict):
         for game_name, game_data in donnees_dict.items():
             q = [game_name] + [0]*q_size # On ajoute le nom du jeu au vecteur q
             for year, year_data in game_data.items():
-                year = str(year)
+                year = int(year)
                 k = (year-2016)*12
                 for month, value in year_data.items():
                     # on remplit q en fonction des données présentes par année et mois
-                    month = str(month)
+                    month = int(month)
                     j = month - 1               
                     
                     q[j+k+1]= 1 # +1 pour éviter de modifier la première entrée de q qui correspond au nom du jeu
@@ -270,14 +270,18 @@ def simulate_marketplace(nb_acheteurs,donnees_dict):
             prob += wvars[i] <= 1
         pulp.LpStatus[prob.solve()]
 
+        
         # On peut afficher les variables de décisions, si wi = 1 => l'offre de l'agent i choisie (car on a gardé les mêmes indices i depuis all_bids)
         print("WD = ", pulp.value(prob.objective), "\nVariables de décisions : ", [pulp.value(wvars[i]) for i in range(A)])
         
+
         winning_bids = [new_bids[i] for i in range(A) if pulp.value(wvars[i]) == 1]
+        
         print("Winning bids:")
         for i, bid in enumerate(winning_bids):
             print(f"  Bid {i+1}: {bid}")
         print("\n")
+        
         return pulp.value(prob.objective)
     
     # On calcule le surplus pour chaque jeu et on les sommes pour surplus global
